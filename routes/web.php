@@ -23,3 +23,6 @@ Route::get('/user/{id}/name/{name}', function ($id, $name) {
 Route::get('/transaksi/{id}', function ($id) {
     return view('transaksi.detail', compact('id'));
 });
+
+Route::get('/level', LevelController::class)->name('level');
+Route::get('/kategori', CategoryController::class)->name('kategori');
