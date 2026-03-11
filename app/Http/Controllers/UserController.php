@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
 use Illuminate\Support\Facades\Hash;
@@ -10,8 +11,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = UserModel::with('level')->get();
-        return view('user', ['data' => $user]);
+
+        $data = [
+            'level_id' => 2,
+            'username' => 'manager dua',
+            'nama' => 'manager dua',
+            'password' => Hash::make('123456'),
+        ];
+
+        UserModel::create($data);
+        // $user = UserModel::with('level')->get();
+        // return view('user', ['data' => $user]);
     }
     public function tambah()
     {
@@ -21,10 +31,10 @@ class UserController extends Controller
     public function tambah_simpan(Request $request)
     {
         UserModel::create([
+            'level_id' => $request->level_id,
             'username' => $request->username,
             'nama' => $request->nama,
-            'password' => Hash::make($request->password),
-            'level_id' => $request->level_id
+            'password' => Hash::make($request->password)
         ]);
         return redirect('/user');
     }

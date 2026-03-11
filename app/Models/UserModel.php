@@ -11,10 +11,11 @@ class UserModel extends Model
 
     protected $table = 'm_user';
     protected $primaryKey = 'user_id';
-    protected $fillable = ['level_id', 'username', 'nama', 'password'];
+    // fillable
+    protected $fillable = ['level_id', 'username', 'nama'];
 
-    public function level()
-    {
-        return $this->hasOne(LevelModel::class, 'level_id', 'level_id');
-    }
+    // public function level()
+    // {
+    //     return $this->hasOne(LevelModel::class, 'level_id', 'level_id');
+    // }
 }
