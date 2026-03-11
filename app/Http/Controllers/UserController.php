@@ -22,7 +22,7 @@ class UserController extends Controller
         // UserModel::create($data);
         // $user = UserModel::firstWhere('level_id', 1);
         // $user = UserModel::where(['username','manager9'])->firstOrFail();
-        $user = UserModel::where('level_id', 2)->count();
+        $user = UserModel::all();
         // dd($user);
         // print_r($user);
         return view('user', ['data' => $user]);
