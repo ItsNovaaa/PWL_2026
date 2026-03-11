@@ -1,31 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
+use App\Http\Controllers\SalesController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('category')->group(function () {
-    Route::get('/', [CategoryController::class, 'foodbeverage'])->name('foodbeverage');
-    Route::get('beautyhealth', [CategoryController::class, 'beautyhealth'])->name('beautyhealth');
-    Route::get('home', [CategoryController::class, 'home'])->name('home');
-    Route::get('babykid', [CategoryController::class, 'babykid'])->name('babykid');
-    Route::get('penjualan', [CategoryController::class, 'penjualan'])->name('penjualan');
+    Route::get('/{category}', [ProductController::class, 'showByCategory'])->name('products.category');
 });
 
-Route::get('/user/{id}/name/{name}', function ($id, $name) {
-    return view('user.profile', compact('id', 'name'));
-});
+Route::get('/user/{id}/name/{name}', [UserController::class, 'showProfile'])->name('user.profile');
 
-Route::get('/transaksi/{id}', function ($id) {
-    return view('transaksi.detail', compact('id'));
-});
+Route::get('/sales', [SalesController::class, 'index'])->name('sales');
 
-Route::get('/level', LevelController::class)->name('level');
-Route::get('/kategori', CategoryController::class)->name('kategori');
-Route::get('/user', UserController::class)->name('user');
+Route::get('/level', [LevelController::class, 'index']);
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/user/tambah', [UserController::class, 'tambah']);
+Route::get('/user', [UserController::class, 'index']);
+Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
+Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
