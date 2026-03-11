@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,3 +28,4 @@ Route::get('/transaksi/{id}', function ($id) {
 
 Route::get('/level', LevelController::class)->name('level');
 Route::get('/kategori', CategoryController::class)->name('kategori');
+Route::get('/user', UserController::class)->name('user');
